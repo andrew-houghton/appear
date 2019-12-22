@@ -15,22 +15,24 @@ def index():
 @app.route("/broadcast", methods=["POST"])
 def broadcast():
     print(f"Flask app received {request.form}")
-    session["receive_count"] = session.get("receive_count", 0) + 1
-    emit(
-        "my_response",
-        {"data": request.form["message"], "count": session["receive_count"]},
-        broadcast=True,
-        namespace="/test",
-    )
+    emit("my_response", {"data": request.form["message"]}, broadcast=True, namespace="")
     return jsonify({"success": True}), 200
 
 
-@socketio.on("connect", namespace="/test")
+@socketio.on("connect")
 def test_connect():
-    emit("my_response", {"data": "Connected", "count": 0})
+    emit("my_response", {"data": "Connected"})
 
 
-@socketio.on("disconnect", namespace="/test")
+@socketio.on("disconnect_request", namespace="/test")
+def disconnect_request():
+    @copy_current_request_context
+    def can_disconnect():
+        disconnect()
+    emit("my_response", {"data": "Disconnected!"}, callback=can_disconnect)
+
+
+@socketio.on("disconnect")
 def test_disconnect():
     print("Client disconnected", request.sid)
 
