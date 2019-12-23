@@ -1,8 +1,14 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, session, request, copy_current_request_context, jsonify
 from flask_socketio import SocketIO, emit, disconnect
+import sys
+from pathlib import Path
 
-app = Flask(__name__)
+if len(sys.argv) < 2:
+    print("You must include a second argument, a path to the template_folder. This folder must contain a file named index.html")
+    sys.exit()
+
+app = Flask(__name__, template_folder=Path(sys.argv[1]).absolute())
 app.config["SECRET_KEY"] = "secret!"
 socketio = SocketIO(app)
 
@@ -20,7 +26,7 @@ def broadcast():
     return jsonify({"success": True}), 200
 
 
-@socketio.on("disconnect_request", namespace="/test")
+@socketio.on("disconnect_request", namespace="")
 def disconnect_request():
     @copy_current_request_context
     def can_disconnect():
