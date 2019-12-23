@@ -14,14 +14,10 @@ def index():
 
 @app.route("/broadcast", methods=["POST"])
 def broadcast():
-    print(f"Flask app received {request.form}")
-    emit("my_response", {"data": request.form["message"]}, broadcast=True, namespace="")
+    data = request.get_json()
+    print(f"Flask app received {data}")
+    emit("my_response", data, broadcast=True, namespace="")
     return jsonify({"success": True}), 200
-
-
-@socketio.on("connect")
-def test_connect():
-    emit("my_response", {"data": "Connected"})
 
 
 @socketio.on("disconnect_request", namespace="/test")
