@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name="appear",
-    version="1.1",
+    version="1.2",
     description="Make program internals appear in the browser",
     author="Andrew Houghton",
     author_email="houghtonandrew0@gmail.com",
