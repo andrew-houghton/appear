@@ -2,14 +2,16 @@
 
 A python package for making hidden details of your application magically appear by streaming them to the browser.
 
-
 ### Installation
 
 Run `pip install appear`
 
-### Why use Appear?
+### When and why should you use Appear?
+
+Use appear if you have a python application which has information you want to visualize in a browser whilst the application is running.
 
 - Low overhead on the data sender, only one line to send data.
+- The application sending the data doesn't have to alter it's function signatures because information is sent via side effects.
 - Low overhead on the frontend, appear takes care of all the data transfer related stuff so you can focus on how to display your data.
 - Flexible, handles multiple visualizations in one page.
 
