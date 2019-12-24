@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Appear</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script src="static/vis_server.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    // Visualization function
+    function update_my_vis(msg) {
+        document.getElementById("numElem").textContent = "The application sent " + msg.num
+    }
+
+    // Link visualization functions to content
+    server = new VisServer()
+    server.subscribe("numbers", update_my_vis)
+    </script>
+</head>
+
+<body>
+    <h1>Appear</h1>
+    <p id="numElem"></p>
+</body>
+
+</html>
