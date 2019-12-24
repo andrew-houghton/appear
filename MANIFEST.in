@@ -1,4 +1,5 @@
 include README.md
 include LICENSE
 include requirements.txt
-include appear/static/*
+recursive-include appear
+include appear/static/vis_server.js

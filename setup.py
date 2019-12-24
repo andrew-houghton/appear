@@ -10,5 +10,7 @@ setup(
     author_email="houghtonandrew0@gmail.com",
     url="https://github.com/andrew-houghton/appear",
     packages=["appear"],
+    package_data={'appear':['static/*']},
+    include_package_data=True,
     install_requires=['Flask-SocketIO', 'grequests'],
 )
