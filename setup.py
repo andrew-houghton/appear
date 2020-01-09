@@ -8,7 +8,7 @@ readme_content = open(Path(__file__).parent.joinpath("README.md"), "r").read()
 
 setup(
     name="appear",
-    version="1.2.2",
+    version="1.2.3",
     description="Make program internals appear in the browser",
     author="Andrew Houghton",
     author_email="houghtonandrew0@gmail.com",
